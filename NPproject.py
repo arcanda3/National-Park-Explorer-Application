@@ -8,7 +8,7 @@ from partnerMicro import sending, receiving
 app = Flask(__name__)
 
 # Global variables for making calls to the National Park Service API
-API_KEY = "6r6skovErjtCYf00muW5HKrgMi4Jp0SmJLJyPC9W"
+API_KEY = ""
 API_BASE_URL = "https://developer.nps.gov/api/v1"
 
 # Global array to store favorited parks
