@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Favorites</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Park Added to Favorites</h1>
+    <p>{{ park_name }} has been successfully added to your favorites!</p>
+
+    <form action="/favorites" method="GET">
+        <button type="submit">View Favorites</button>
+    </form>
+    <form action="/park_details/{{ park_name }}" method="GET">
+        <button type="submit">Back to Park Details</button>
+    </form>
+    <form action="/" method="GET" class="horizontal-buttons">
+        <button type="submit">Home</button>
+    </form>
+</body>
+</html>

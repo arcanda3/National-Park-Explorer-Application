@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Parks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Search Parks</h1>
+    <form method="POST" action="{{ url_for('search_parks_route') }}">
+        <label for="search_term">Enter park name or state:</label>
+        <input type="text" id="search_term" name="search_term">
+        <button type="submit">Search</button>
+    </form>
+
+    <div>
+        <p>{{ message }}</p>
+        {% if parks %}
+        <p>Click on a park to view park details.</p>
+            <ul>
+            {% for park in parks %}
+                <li><a href="/park_details/{{ park.fullName }}">{{ park.fullName }}- {{ park.states }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <form action="/" method="GET" class="horizontal-buttons">
+        <button type="submit">Home</button>
+    </form>
+</body>
+</html>

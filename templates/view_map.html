@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>{{ park_name }} Map</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var parkBoundaries = {{ park_boundaries|tojson }};
+        var map = L.map('map').setView([0, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add the GeoJSON layer to the map
+        var boundariesLayer = L.geoJSON(parkBoundaries, {
+            style: function (feature) {
+                return { color: 'green', fillOpacity: 0.2 };
+            }
+        }).addTo(map);
+
+        // Calculate the bounds of the GeoJSON layer
+        var bounds = boundariesLayer.getBounds();
+
+        // Fit the map view to the calculated bounds with a padding of 50 pixels
+        map.fitBounds(bounds, { padding: [50, 50] });
+    </script>
+
+    <form action="/park_details/{{ park_name }}" method="GET" class="horizontal-buttons">
+        <button type="submit">Back to Park Details</button>
+    </form>
+    <form action="/" method="GET" class="horizontal-buttons">
+        <button type="submit">Home</button>
+    </form>
+
+</body>
+</html>

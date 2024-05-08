@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Trail Recommendations</h1>
+
+    <form action="/trail_recommendations" method="POST">
+        <label for="park_name">Select a park:</label>
+        <select id="park_name" name="park_name">
+            {% for park_name in park_names %}
+            <option value="{{ park_name }}">{{ park_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Trails</button>
+    </form>
+
+    <p>Find trail information for a national park and it's surrounding area.</p>
+
+
+    {% if trails %}
+    <h2>Trails near {{ park_name }}</h2>
+    <div id="trails_result">
+        <ul>
+            {% for trail_name, trail_description in trails.items() %}
+            <li>Trail Name: {{ trail_name }}</li>
+            <div style="margin-left: 20px;"> <!-- Adjust the margin-left value as needed for indentation -->
+                <li>{{ trail_description | safe }}</li>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <form action="/" method="GET" class="horizontal-buttons">
+        <button type="submit">Home</button>
+    </form>
+</body>
+</html>
+

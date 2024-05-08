@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Things To Do In And Around The Parks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Find Things To Do In And Around The Parks</h1>
+    <form action="/itinerary" method="POST">
+        <label for="park_code">Select a park:</label>
+        <select id="park_code" name="park_code">
+            {% for park_name, park_code in park_names %}
+            <option value="{{ park_code }}">{{ park_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="park_name" id="park_name" value="">
+        <script>
+            document.getElementById('park_code').addEventListener('change', function() {
+                var parkName = document.getElementById('park_code').options[document.getElementById('park_code').selectedIndex].text;
+                document.getElementById('park_name').value = parkName;
+            });
+        </script>
+
+        <button type="submit">Get Activities</button>
+    </form>
+
+    <p>Find activities and places to visit near a national park to help build your itinerary.</p>
+
+    {% if activities %}
+    <h3>Things to Do near {{ park_name }}</h3>
+    <ul>
+        {% for activity in activities %}
+        <li>
+            <h4>{{ activity.title }}</h4>
+            <p>{% if activity.shortDescription %}Description: {{ activity.shortDescription | safe }}{% endif %}</p>
+            <p>{% if activity.locationDescription %}Location: {{ activity.locationDescription | safe }}{% endif %}</p>
+            <p>{% if activity.petsDescription %}Pets: {{ activity.petsDescription | safe }}{% endif %}</p>
+            <p>{% if activity.durationDescription %}Duration: {{ activity.durationDescription | safe }}{% endif %}</p>
+            <p>{% if activity.activityDescription %}Activity: {{ activity.activityDescription | safe }}{% endif %}</p>
+            <p>{% if activity.url %}Link: <a href="{{ activity.url }}">{{ activity.url | safe }}</a>{% endif %}</p>
+
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="/" method="GET" class="horizontal-buttons">
+        <button type="submit">Home</button>
+    </form>
+</body>
+</html>

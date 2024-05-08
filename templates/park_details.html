@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Park Details</h1>
+
+    <form action="/park_details" method="POST">
+        <label for="park_name">Select a park:</label>
+        <select id="park_name" name="park_name">
+            {% for park_name in park_names %}
+            <option value="{{ park_name }}">{{ park_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Park Details</button>
+    </form>
+    <p>Find detailed information about the national parks.</p>
+    {% if park_details %}
+    <h2>{{ park_details[0]['fullName'] }}</h2>
+
+    {% if random_image %}
+    <div class="park-image">
+        <img src="{{ random_image['url'] }}" alt="{{ random_image['title'] }}" style="max-width: 50%; max-height: 200px;">
+        <div class="caption">{{ random_image['title'] }}</div>
+    </div>
+    {% endif %}
+
+    <div class="park-detail">
+        <h3>Activities:</h3>
+        <ul>
+            {% for activity in park_details[0]['activities'] %}
+            <li>{{ activity['name'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="park-detail">
+        <h3>Entrance Fees:</h3>
+        <ul>
+            {% for fee in park_details[0]['entranceFees'] %}
+            <li>{{ fee['title'] }}: ${{ fee['cost'] }} - {{ fee['description'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="park-detail">
+        <h3>Entrance Passes:</h3>
+        <ul>
+            {% for pass in park_details[0]['entrancePasses'] %}
+            <li>{{ pass['title'] }}: ${{ pass['cost'] }} - {{ pass['description'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="park-detail">
+        <h3>Operating Hours:</h3>
+        <p>{{ park_details[0]['operatingHours'][0]['description'] }}</p>
+    </div>
+
+    <div class="park-detail">
+        <h3>Park Alerts:</h3>
+        <ul>
+            {% for alert in alerts %}
+            <li>{{ alert[ 'title' ] }}</li>
+            <div style="margin-left: 20px;"> <!-- Adjust the margin-left value as needed for indentation -->
+                <li>{{ alert[ 'description' ] }}</li>
+                <li>Date: {{ alert[ 'lastIndexedDate' ] }}</li>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="park-detail">
+        <h3>Amenities & Accessibility:</h3>
+        <ul>
+            {% for amenity in amenities %}
+            <li>{{ amenity[ 'name' ] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="park-detail">
+        <h3>Weather Info:</h3>
+        <p>{{ park_details[0]['weatherInfo'] }}</p>
+    </div>
+
+    <form action="/view_map" method="POST" class="horizontal-buttons">
+        <input type="hidden" name="site_code" value="{{ park_details[0]['parkCode'] }}">
+        <input type="hidden" name="park_name" value="{{ park_details[0]['fullName'] }}">
+        <button type="submit">View Park Map</button>
+    </form>
+
+    <form action="/add_favorite" method="POST" class="horizontal-buttons">
+        <input type="hidden" name="park_name" value="{{ park_details[0]['fullName'] }}">
+        <button type="submit">Add to Favorites</button>
+    </form>
+
+    {% endif %}
+    <form action="/" method="GET" class="horizontal-buttons">
+        <button type="submit">Home</button>
+    </form>
+
+</body>
+</html>

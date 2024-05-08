@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Parks Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>National Parks Explorer</h1>
+    {% if random_image %}
+        <img src="{{ random_image['url'] }}" alt="{{ random_image['title'] }}" style="max-width: 50%; max-height: 800px;">
+        <div class="caption">{{ random_image['title'] }}</div>
+    {% endif %}
+
+    <form action="/list_parks" method="GET">
+        <button type="submit">Look Through a List of All Parks</button>
+    </form>
+    <form action="/search_parks" method="GET">
+        <button type="submit">Search for Parks by Name or State</button>
+    </form>
+    <form action="/trail_recommendations" method="GET">
+        <button type="submit">Get Trail Recommendations</button>
+    </form>
+    <form action="/park_details" method="GET">
+        <button type="submit">Explore Park Details</button>
+    </form>
+    <form action="/itinerary" method="GET">
+        <button type="submit">Find Things To Do In And Around The Parks</button>
+    </form>
+    <form action="/favorites" method="GET">
+        <button type="submit">Favorites</button>
+    </form>
+
+</body>
+</html>

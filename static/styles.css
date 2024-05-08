@@ -1,0 +1,143 @@
+/* Reset default browser styles */
+body, h1, h2, h3, p, ul, li, a, button, form {
+    margin: 0.25;
+    padding: 0.75;
+    box-sizing: border-box;
+}
+
+/* Set background color */
+body {
+    background-color: #e1ebe7;
+}
+
+/* Basic styling for headings */
+h1, h2, h3 {
+    font-family: Arial, sans-serif;
+    color: #325940;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Basic styling for paragraphs */
+p {
+    font-family: Arial, sans-serif;
+    color: #594a32;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Basic styling for lists */
+ul, ol {
+    font-family: Arial, sans-serif;
+    color: #594a32;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+li {
+    font-family: Arial, sans-serif;
+    color: #594a32;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+/* Basic styling for links */
+a {
+    font-family: Arial, sans-serif;
+    color: #325940;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Basic styling for buttons */
+button {
+    background-color: #325940;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-block
+}
+
+button:hover {
+    background-color: #2c4d35; /* Darker green on hover */
+}
+
+input[type="submit"],
+button {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.horizontal-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.horizontal-buttons button {
+    margin: 0 10px;
+}
+
+/* basic styling for forms */
+form {
+    background-color: #b3c7bf; /* Light background color */
+    border-radius: 5px;
+    padding: 20px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #325940;
+    font-family: Arial, sans-serif;
+
+}
+
+form select,
+form input[type="text"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.caption {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: 9e9d9d;
+    margin-top: 1px;
+    margin-bottom: 5px;
+}
